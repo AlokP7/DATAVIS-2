@@ -1,0 +1,16 @@
+City1,City2,Lat1,Lon1,Lat2,Lon2,Passengers_2024,Route
+Melbourne,Sydney,-37.674,144.843,-33.946,151.177,8039295,Melbourne – Sydney
+Brisbane,Sydney,-27.384,153.118,-33.946,151.177,4358325,Brisbane – Sydney
+Brisbane,Melbourne,-27.384,153.118,-37.674,144.843,3499263,Brisbane – Melbourne
+Gold Coast,Sydney,-28.164,153.504,-33.946,151.177,2538036,Gold Coast – Sydney
+Adelaide,Melbourne,-34.945,138.53,-37.674,144.843,2331114,Adelaide – Melbourne
+Melbourne,Gold Coast,-37.674,144.843,-28.164,153.504,2187900,Melbourne – Gold Coast
+Melbourne,Perth,-37.674,144.843,-31.94,115.967,2030577,Melbourne – Perth
+Adelaide,Sydney,-34.945,138.53,-33.946,151.177,1883796,Adelaide – Sydney
+Perth,Sydney,-31.94,115.967,-33.946,151.177,1639356,Perth – Sydney
+Hobart,Melbourne,-42.836,147.51,-37.674,144.843,1373110,Hobart – Melbourne
+Brisbane,Cairns,-27.384,153.118,-16.887,145.755,1305477,Brisbane – Cairns
+Brisbane,Perth,-27.384,153.118,-31.94,115.967,1090947,Brisbane – Perth
+Canberra,Melbourne,-35.307,149.195,-37.674,144.843,1009351,Canberra – Melbourne
+Brisbane,Townsville,-27.384,153.118,-19.253,146.765,940794,Brisbane – Townsville
+Cairns,Sydney,-16.887,145.755,-33.946,151.177,919237,Cairns – Sydney
