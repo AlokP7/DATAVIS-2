@@ -707,7 +707,44 @@ const specAnnotated = {
 // ─────────────────────────────────────────────────────────────────
 // CHART 6 — Scatter: distance vs fare + regression
 // ─────────────────────────────────────────────────────────────────
-
+const specScatter = {
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "width": "container",
+  "height": 340,
+  "data": { "url": F_ROUTES },
+  "layer": [
+    {
+      "mark": { "type": "line", "strokeDash": [5,4], "color": "#bbb", "strokeWidth": 1.5 },
+      "transform": [{ "regression": "Real_2024", "on": "Distance_km" }],
+      "encoding": {
+        "x": { "field": "Distance_km", "type": "quantitative" },
+        "y": { "field": "Real_2024",   "type": "quantitative" }
+      }
+    },
+    {
+      "mark": { "type": "point", "filled": true, "size": 80, "opacity": 0.8,
+                "stroke": "#fff", "strokeWidth": 0.8 },
+      "encoding": {
+        "x": { "field": "Distance_km", "type": "quantitative",
+               "title": "Route distance (km)", "axis": { "format": ",.0f" } },
+        "y": { "field": "Real_2024", "type": "quantitative",
+               "title": "Avg real fare 2024 ($AUD)",
+               "axis": { "format": "$,.0f" }, "scale": { "zero": true } },
+        "color": {
+          "field": "Fare_Per_km", "type": "quantitative",
+          "scale": { "scheme": "greys", "domain": [0.1, 1.1] },
+          "legend": { "title": "$/km", "format": "$,.2f", "orient": "right" }
+        },
+        "tooltip": [
+          { "field": "Route",       "title": "Route" },
+          { "field": "Distance_km", "title": "Distance (km)", "format": ",.0f" },
+          { "field": "Real_2024",   "title": "Avg Fare 2024", "format": "$,.0f" },
+          { "field": "Fare_Per_km", "title": "$/km",          "format": "$,.2f" }
+        ]
+      }
+    }
+  ]
+};
 
 // ─────────────────────────────────────────────────────────────────
 // CHART 7 — Dumbbell: 2010 vs 2024
@@ -800,6 +837,178 @@ const specHeatmap = {
 // ─────────────────────────────────────────────────────────────────
 // CHART 9 — Small multiples
 // ─────────────────────────────────────────────────────────────────
+const specMultiples = {
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "width": "container",
+  "data": { "url": F_SM },
+  "facet": {
+    "field": "City", "type": "nominal",
+    "columns": 4,
+    "header": {
+      "titleFontSize": 0,
+      "labelFont": "Inter, sans-serif",
+      "labelFontSize": 12,
+      "labelFontWeight": 500,
+      "labelColor": "#1a1a1a"
+    }
+  },
+  "spec": {
+    "width": 150, "height": 110,
+    "layer": [{
+      "mark": { "type": "area", "color": "#1a1a1a", "fillOpacity": 0.07,
+                "line": { "color": "#1a1a1a", "strokeWidth": 1.5 },
+                "interpolate": "monotone" },
+      "encoding": {
+        "x": {
+          "field": "Month", "type": "ordinal", "title": null,
+          "axis": {
+            "values": [1,4,7,10],
+            "labelExpr": "datum.value == 1 ? 'Jan' : datum.value == 4 ? 'Apr' : datum.value == 7 ? 'Jul' : 'Oct'",
+            "labelFontSize": 9
+          }
+        },
+        "y": { "field": "Fare", "type": "quantitative", "title": "$",
+               "axis": { "format": "$,.0f", "labelFontSize": 9 },
+               "scale": { "zero": false } },
+        "tooltip": [
+          { "field": "City" },
+          { "field": "Month_Name", "title": "Month" },
+          { "field": "Fare", "title": "Avg Fare", "format": "$,.0f" }
+        ]
+      }
+    }]
+  }
+};
+
+// ─────────────────────────────────────────────────────────────────
+// CHART 10 — Passenger area chart
+// ─────────────────────────────────────────────────────────────────
+const specPassengers = {
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "width": "container",
+  "height": 300,
+  "data": { "url": F_PAX },
+  "transform": [
+    { "calculate": "datum.Year + (datum.Month - 1)/12", "as": "YearFrac" }
+  ],
+  "layer": [
+    {
+      "mark": { "type": "rect", "opacity": 0.06, "color": "#333" },
+      "data": { "values": [{ "x1": 2020.15, "x2": 2022.0 }] },
+      "encoding": {
+        "x":  { "field": "x1", "type": "quantitative" },
+        "x2": { "field": "x2" }
+      }
+    },
+    {
+      "mark": { "type": "area", "color": "#1a1a1a", "fillOpacity": 0.08,
+                "line": { "color": "#1a1a1a", "strokeWidth": 1.5 },
+                "interpolate": "monotone" },
+      "encoding": {
+        "x": { "field": "YearFrac", "type": "quantitative", "title": null,
+               "axis": { "format": ".0f", "tickCount": 8,
+                         "values": [1984,1990,1995,2000,2005,2010,2015,2020,2025] } },
+        "y": { "field": "Passenger_Trips", "type": "quantitative",
+               "title": "Monthly passenger trips",
+               "axis": { "format": ",.0f" }, "scale": { "zero": true } },
+        "tooltip": [
+          { "field": "Year" }, { "field": "Month" },
+          { "field": "Passenger_Trips", "title": "Passengers", "format": ",.0f" }
+        ]
+      }
+    },
+    {
+      "data": { "values": [
+        { "x": 2001.7, "label": "Ansett collapse" },
+        { "x": 2020.2, "label": "COVID-19" }
+      ]},
+      "mark": { "type": "rule", "strokeDash": [3,3], "color": "#aaa", "strokeWidth": 1 },
+      "encoding": { "x": { "field": "x", "type": "quantitative" } }
+    },
+    {
+      "data": { "values": [
+        { "x": 2001.7, "y": 760000, "label": "Ansett collapse" },
+        { "x": 2020.2, "y": 760000, "label": "COVID-19" }
+      ]},
+      "mark": { "type": "text", "align": "left", "dx": 5, "fontSize": 9.5,
+                "color": "#888", "fontStyle": "italic" },
+      "encoding": {
+        "x":    { "field": "x",     "type": "quantitative" },
+        "y":    { "field": "y",     "type": "quantitative" },
+        "text": { "field": "label" }
+      }
+    }
+  ]
+};
+
+// ─────────────────────────────────────────────────────────────────
+// CHART 11 — Seat Full Chart
+// ─────────────────────────────────────────────────────────────────
+const specLoadFactor = {
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "width": "container",
+  "height": 220,
+  "data": { "url": F_PAX },
+  "transform": [
+    { "calculate": "datum.Year + (datum.Month - 1)/12", "as": "YearFrac" }
+  ],
+  "layer": [
+    {
+      "mark": { "type": "rule", "strokeDash": [4,4], "color": "#aaa", "strokeWidth": 1 },
+      "data": { "values": [{ "v": 80 }] },
+      "encoding": { "y": { "field": "v", "type": "quantitative" } }
+    },
+    {
+      "data": { "values": [{ "x": 1984.5, "y": 82, "t": "80% — commercial threshold" }] },
+      "mark": { "type": "text", "align": "left", "dx": 4, "fontSize": 9.5, "color": "#888" },
+      "encoding": {
+        "x":    { "field": "x", "type": "quantitative" },
+        "y":    { "field": "y", "type": "quantitative" },
+        "text": { "field": "t" }
+      }
+    },
+    {
+      "mark": { "type": "line", "color": "#1a1a1a", "strokeWidth": 1.5, "interpolate": "monotone" },
+      "encoding": {
+        "x": { "field": "YearFrac", "type": "quantitative", "title": null,
+               "axis": { "format": ".0f",
+                         "values": [1984,1990,1995,2000,2005,2010,2015,2020,2025] } },
+        "y": { "field": "Load_Factor", "type": "quantitative",
+               "title": "Load factor (%)", "scale": { "domain": [20, 100] } },
+        "tooltip": [
+          { "field": "Year" }, { "field": "Month" },
+          { "field": "Load_Factor", "title": "Load factor (%)", "format": ".1f" }
+        ]
+      }
+    }
+  ]
+};
+
+// ─────────────────────────────────────────────────────────────────
+// CHART 12 — Aircraft trips
+// ─────────────────────────────────────────────────────────────────
+const specAircraft = {
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "width": "container",
+  "height": 220,
+  "data": { "url": F_PAX },
+  "transform": [
+    { "calculate": "datum.Year + (datum.Month - 1)/12", "as": "YearFrac" }
+  ],
+  "mark": { "type": "line", "color": "#1a1a1a", "strokeWidth": 1.5, "interpolate": "monotone" },
+  "encoding": {
+    "x": { "field": "YearFrac", "type": "quantitative", "title": null,
+           "axis": { "format": ".0f",
+                     "values": [1984,1990,1995,2000,2005,2010,2015,2020,2025] } },
+    "y": { "field": "Aircraft_Trips", "type": "quantitative",
+           "title": "Aircraft trips (monthly)",
+           "axis": { "format": ",.0f" }, "scale": { "zero": true } },
+    "tooltip": [
+      { "field": "Year" }, { "field": "Month" },
+      { "field": "Aircraft_Trips", "title": "Aircraft trips", "format": ",.0f" }
+    ]
+  }
+};
 
 // ─────────────────────────────────────────────────────────────────
 // EMBED ALL CHARTS
