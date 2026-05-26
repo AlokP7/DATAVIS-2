@@ -12,108 +12,106 @@
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
 
   <style>
-    /* ── Variables (blue theme) ─────────────────────────────────── */
+    /* ── Variables (clean blue theme, no green/red together) ───── */
     :root {
       --blue-dark:   #08306b;
       --blue-mid:    #2171b5;
       --blue-light:  #6baed6;
       --blue-pale:   #deebf7;
-      --ink:         #1c2340;
+      --ink:         #1a2a3a;
       --ink-soft:    #3d4a6a;
       --muted:       #6b7a9e;
-      --rule:        #d0d8e8;
-      --bg:          #f6f7fb;
+      --rule:        #dce3ec;
+      --bg:          #f8fafd;
       --card-bg:     #ffffff;
       --accent:      #c0392b;
+      --shadow-sm:   0 4px 12px rgba(8,48,107,0.08);
+      --shadow-hover:0 8px 24px rgba(8,48,107,0.12);
     }
 
-    /* ── Reset ─────────────────────────────────────────── */
+    /* ── Reset & base – extremely zoomed in ───────────────────── */
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-    html { scroll-behavior: smooth; font-size: 15px; }
+    html { scroll-behavior: smooth; font-size: 40px; }
 
     body {
       background: var(--bg);
       color: var(--ink);
       font-family: 'Inter', system-ui, sans-serif;
       font-weight: 400;
-      line-height: 1.7;
+      line-height: 1.4;
+      -webkit-font-smoothing: antialiased;
     }
 
-    /* ── Page shell ────────────────────────────────────── */
-    .page { max-width: 880px; margin: 0 auto; padding: 0 32px 120px; }
+    /* ── Page shell – wider to fit larger charts ──────────────── */
+    .page { max-width: 1300px; margin: 0 auto; padding: 0 32px 100px; }
 
-    /* ── Masthead ──────────────────────────────────────── */
+    /* ── Masthead ────────────────────────────────────────────── */
     .masthead {
-      padding: 72px 0 48px;
+      padding: 40px 0 25px;
       border-bottom: 3px solid var(--blue-dark);
-      margin-bottom: 52px;
+      margin-bottom: 40px;
       position: relative;
     }
     .masthead::before {
       content: '';
       position: absolute;
       top: 0; left: 0; right: 0;
-      height: 4px;
+      height: 5px;
       background: linear-gradient(90deg, var(--blue-dark), var(--blue-mid), var(--blue-light));
     }
     .masthead-label {
-      font-size: 10.5px;
+      font-size: 0.35rem;
       font-weight: 600;
-      letter-spacing: 0.22em;
+      letter-spacing: 0.2em;
       text-transform: uppercase;
       color: var(--blue-mid);
-      margin-bottom: 20px;
+      margin-bottom: 12px;
       display: block;
     }
     .masthead h1 {
       font-family: 'Playfair Display', Georgia, serif;
-      font-size: clamp(2.4rem, 5.5vw, 3.8rem);
+      font-size: clamp(1.8rem, 3.5vw, 2.5rem);
       font-weight: 900;
-      line-height: 1.08;
-      letter-spacing: -0.03em;
+      line-height: 1.05;
+      letter-spacing: -0.02em;
       color: var(--blue-dark);
-      margin-bottom: 22px;
+      margin-bottom: 15px;
     }
-    .masthead h1 em {
-      font-style: italic;
-      color: var(--blue-mid);
-    }
+    .masthead h1 em { font-style: italic; color: var(--blue-mid); }
     .masthead-deck {
-      font-size: 16.5px;
+      font-size: 0.6rem;
       color: var(--ink-soft);
-      max-width: 640px;
-      line-height: 1.7;
-      font-weight: 300;
+      max-width: 680px;
+      line-height: 1.4;
     }
     .masthead-meta {
-      margin-top: 28px;
-      padding-top: 18px;
+      margin-top: 15px;
+      padding-top: 10px;
       border-top: 1px solid var(--rule);
-      font-size: 11.5px;
+      font-size: 0.4rem;
       color: var(--muted);
-      line-height: 1.8;
     }
 
-    /* ── KPI strip ─────────────────────────────────────── */
+    /* ── KPI strip ───────────────────────────────────────────── */
     .kpi-strip {
       display: grid;
       grid-template-columns: repeat(4, 1fr);
-      margin-bottom: 60px;
-      border: 1.5px solid var(--rule);
-      border-radius: 6px;
+      margin-bottom: 50px;
+      border: 1px solid var(--rule);
+      border-radius: 16px;
       overflow: hidden;
       background: var(--card-bg);
-      box-shadow: 0 1px 4px rgba(8,48,107,0.06);
+      box-shadow: var(--shadow-sm);
     }
     .kpi-item {
-      padding: 22px 18px;
-      border-right: 1.5px solid var(--rule);
+      padding: 16px 10px;
+      border-right: 1px solid var(--rule);
       text-align: center;
     }
     .kpi-item:last-child { border-right: none; }
     .kpi-value {
       font-family: 'Playfair Display', serif;
-      font-size: 2rem;
+      font-size: 1.5rem;
       font-weight: 700;
       color: var(--blue-dark);
       display: block;
@@ -121,30 +119,30 @@
       margin-bottom: 5px;
     }
     .kpi-label {
-      font-size: 10px;
+      font-size: 0.3rem;
       font-weight: 600;
       letter-spacing: 0.12em;
       text-transform: uppercase;
       color: var(--muted);
     }
 
-    /* ── Sections ──────────────────────────────────────── */
-    .section { margin-bottom: 80px; }
+    /* ── Sections ────────────────────────────────────────────── */
+    .section { margin-bottom: 60px; }
 
     .section-header {
       display: flex;
       align-items: baseline;
-      gap: 14px;
-      margin-bottom: 10px;
+      gap: 16px;
+      margin-bottom: 8px;
     }
     .section-number {
-      font-size: 10.5px;
+      font-size: 0.35rem;
       font-weight: 600;
       letter-spacing: 0.2em;
       text-transform: uppercase;
       color: var(--blue-light);
       flex-shrink: 0;
-      padding-top: 2px;
+      padding-top: 3px;
     }
     .section-rule {
       flex: 1;
@@ -154,143 +152,152 @@
 
     h2 {
       font-family: 'Playfair Display', Georgia, serif;
-      font-size: clamp(1.5rem, 3.2vw, 2.2rem);
+      font-size: clamp(1.2rem, 2.2vw, 1.6rem);
       font-weight: 700;
       color: var(--blue-dark);
-      line-height: 1.18;
-      margin-bottom: 14px;
-      letter-spacing: -0.02em;
+      line-height: 1.2;
+      margin-bottom: 10px;
+      letter-spacing: -0.01em;
     }
     .section-intro {
       color: var(--ink-soft);
-      max-width: 700px;
-      margin-bottom: 32px;
-      font-size: 14.5px;
-      line-height: 1.8;
-      font-weight: 300;
+      max-width: 740px;
+      margin-bottom: 25px;
+      font-size: 0.55rem;
+      line-height: 1.5;
     }
-    .section-intro em { font-style: italic; color: var(--ink); }
-    .section-intro strong { font-weight: 600; color: var(--ink); }
 
-    /* ── Chart cards ───────────────────────────────────── */
+    /* ── Chart cards (modern & spacious) ─────────────────────── */
     .chart-card {
       background: var(--card-bg);
-      border: 1.5px solid var(--rule);
-      border-radius: 6px;
-      padding: 26px 24px 18px;
-      margin-bottom: 20px;
-      box-shadow: 0 1px 4px rgba(8,48,107,0.05);
-      transition: box-shadow 0.2s;
+      border: 1px solid var(--rule);
+      border-radius: 20px;
+      padding: 20px 18px 16px;
+      margin-bottom: 28px;
+      box-shadow: var(--shadow-sm);
+      transition: box-shadow 0.25s ease, transform 0.2s;
     }
     .chart-card:hover {
-      box-shadow: 0 3px 12px rgba(8,48,107,0.09);
+      box-shadow: var(--shadow-hover);
+      transform: translateY(-2px);
     }
     .chart-title {
-      font-size: 13px;
+      font-size: 0.6rem;
       font-weight: 600;
       color: var(--ink);
       margin-bottom: 4px;
-      letter-spacing: 0;
     }
     .chart-sub {
-      font-size: 11.5px;
+      font-size: 0.45rem;
       color: var(--muted);
-      margin-bottom: 20px;
-      line-height: 1.55;
-      font-weight: 300;
+      margin-bottom: 18px;
+      line-height: 1.4;
+      <div class="map-legend">
+  <div class="legend-item">
+    <span style="width:12px;height:12px;border-radius:50%;background:#08306b;display:inline-block;border:1px solid #fff;box-shadow:0 0 0 1px #08306b"></span>
+    Fares increased 2010–2024
+  </div>
+  <div class="legend-item">
+    <span style="width:12px;height:12px;border-radius:50%;background:#c0392b;display:inline-block;border:1px solid #fff;box-shadow:0 0 0 1px #c0392b"></span>
+    Fares decreased 2010–2024
+  </div>
+  <div class="legend-item">Circle size = magnitude of change ($AUD)</div>
+</div>
+      
     }
     .chart-wrap { width: 100%; }
     .vega-embed { width: 100%; }
     .vega-embed summary { display: none !important; }
 
-    /* ── Grids only for earlier two-column charts, NOT for passenger section ── */
+    /* ── Two‑column grid ─────────────────────────────────────── */
     .grid-2 {
       display: grid;
       grid-template-columns: 1fr 1fr;
-      gap: 20px;
-      margin-bottom: 20px;
+      gap: 24px;
+      margin-bottom: 24px;
     }
     .grid-2 .chart-card { margin-bottom: 0; }
 
-    /* ── Callout ───────────────────────────────────────── */
+    /* ── Callout ─────────────────────────────────────────────── */
     .callout {
       border-left: 4px solid var(--blue-mid);
-      padding: 14px 20px;
-      margin: 24px 0;
+      padding: 12px 16px;
+      margin: 20px 0;
       background: var(--blue-pale);
-      font-size: 13.5px;
+      font-size: 0.48rem;
       color: var(--ink-soft);
-      line-height: 1.65;
-      border-radius: 0 6px 6px 0;
+      line-height: 1.4;
+      border-radius: 0 12px 12px 0;
     }
     .callout strong { color: var(--ink); font-weight: 600; }
 
-    /* ── Map legend ────────────────────────────────────── */
+    /* ── Map legends (HTML) ──────────────────────────────────── */
     .map-legend {
       display: flex;
-      gap: 24px;
+      gap: 20px;
       flex-wrap: wrap;
-      margin-top: 14px;
+      margin-top: 15px;
       padding-top: 12px;
       border-top: 1px solid var(--rule);
-      font-size: 11.5px;
+      font-size: 0.42rem;
       color: var(--muted);
       align-items: center;
     }
-    .legend-item { display: flex; align-items: center; gap: 7px; }
+    .legend-item { display: flex; align-items: center; gap: 6px; }
     .legend-line {
-      width: 30px; height: 3px;
+      width: 24px; height: 3px;
       background: var(--blue-mid);
       display: inline-block;
       border-radius: 2px;
     }
-    .legend-line.thick { height: 7px; background: var(--blue-dark); }
+    .legend-line.thick { height: 6px; background: var(--blue-dark); }
     .legend-line.thin  { height: 1.5px; background: var(--blue-light); }
     .legend-dot {
-      width: 10px; height: 10px;
+      width: 8px; height: 8px;
       background: var(--accent);
       border-radius: 50%;
       display: inline-block;
-      border: 1.5px solid #fff;
+      border: 1px solid #fff;
       box-shadow: 0 0 0 1px var(--accent);
     }
 
-    /* ── Threshold legend ──────────────────────────────── */
+    /* ── Threshold legend ────────────────────────────────────── */
     .threshold-legend {
       display: inline-flex;
       align-items: center;
       gap: 8px;
-      font-size: 11px;
+      font-size: 0.4rem;
       color: var(--muted);
       margin-top: 10px;
     }
     .threshold-line {
-      width: 32px; height: 0;
+      width: 28px; height: 0;
       border-top: 2px dashed var(--blue-mid);
       display: inline-block;
     }
 
-    /* ── Footer ────────────────────────────────────────── */
+    /* ── Footer ──────────────────────────────────────────────── */
     footer {
       border-top: 2px solid var(--rule);
-      padding: 36px 0 20px;
-      font-size: 11.5px;
+      padding: 25px 0 12px;
+      font-size: 0.38rem;
       color: var(--muted);
-      line-height: 1.9;
+      line-height: 1.6;
     }
     footer strong { color: var(--ink-soft); font-weight: 600; }
     footer a { color: var(--blue-mid); text-decoration: none; }
     footer a:hover { text-decoration: underline; }
 
-    /* ── Responsive ────────────────────────────────────── */
-    @media (max-width: 640px) {
-      .grid-2 { grid-template-columns: 1fr; }
-      .kpi-strip { grid-template-columns: repeat(2, 1fr); }
+    /* ── Responsive ──────────────────────────────────────────── */
+    @media (max-width: 860px) {
+      .page { padding: 0 16px 60px; }
+      .grid-2 { grid-template-columns: 1fr; gap: 20px; }
+      .kpi-strip { grid-template-columns: repeat(2, 1fr); border-radius: 12px; }
       .kpi-item:nth-child(2) { border-right: none; }
       .kpi-item:nth-child(3),
-      .kpi-item:nth-child(4) { border-top: 1.5px solid var(--rule); }
+      .kpi-item:nth-child(4) { border-top: 1px solid var(--rule); }
       .kpi-item:nth-child(4) { border-right: none; }
-      .page { padding: 0 20px 80px; }
+      .chart-card { padding: 16px 14px 12px; }
     }
   </style>
 </head>
@@ -312,22 +319,10 @@
 
   <!-- ══ KPI STRIP ═════════════════════════════════════════════ -->
   <div class="kpi-strip">
-    <div class="kpi-item">
-      <span class="kpi-value">83</span>
-      <span class="kpi-label">Routes tracked</span>
-    </div>
-    <div class="kpi-item">
-      <span class="kpi-value">8M+</span>
-      <span class="kpi-label">MEL–SYD passengers, 2024</span>
-    </div>
-    <div class="kpi-item">
-      <span class="kpi-value">16yr</span>
-      <span class="kpi-label">Data span 2010–2026</span>
-    </div>
-    <div class="kpi-item">
-      <span class="kpi-value">−99%</span>
-      <span class="kpi-label">COVID passenger collapse</span>
-    </div>
+    <div class="kpi-item"><span class="kpi-value">83</span><span class="kpi-label">Routes tracked</span></div>
+    <div class="kpi-item"><span class="kpi-value">8M+</span><span class="kpi-label">MEL–SYD passengers, 2024</span></div>
+    <div class="kpi-item"><span class="kpi-value">16yr</span><span class="kpi-label">Data span 2010–2026</span></div>
+    <div class="kpi-item"><span class="kpi-value">−99%</span><span class="kpi-label">COVID passenger collapse</span></div>
   </div>
 
   <!-- ══ SECTION 01 — OVERVIEW MAP ═════════════════════════════ -->
@@ -338,7 +333,7 @@
     </div>
     <h2>Australia's Busiest Air Routes</h2>
     <p class="section-intro">
-      The Melbourne–Sydney corridor is the world's third-busiest air route, carrying over <strong>8 million passengers</strong> in 2024. The east-coast triangle — Sydney, Melbourne, Brisbane — dominates domestic aviation. Long-haul routes to Perth and Cairns connect remote Australia to the major hubs.
+      The Melbourne–Sydney corridor is the world's third-busiest air route, carrying over <strong>8 million passengers</strong> in 2024. The east-coast triangle — Sydney, Melbourne, Brisbane — dominates domestic aviation, while long-haul routes to Perth and Cairns connect remote Australia to the major hubs. This is the network whose fares this dashboard explores.
     </p>
 
     <div class="chart-card">
@@ -367,15 +362,43 @@
     </div>
   </section>
 
-  <!-- ══ SECTION 02 — FARE TRENDS ══════════════════════════════ -->
-  <section class="section" id="trends">
+  <!-- ══ SECTION 02 — GEOGRAPHY OF COST ════════════════════════ -->
+  <section class="section" id="geo-fares">
     <div class="section-header">
       <span class="section-number">02</span>
       <hr class="section-rule">
     </div>
+    <h2>Where Is Flying Most Expensive?</h2>
+    <p class="section-intro">
+      Before looking at how fares have changed, it helps to understand the geographic landscape of cost. Travellers departing from <strong>Western Australia and the Northern Territory</strong> face average real fares nearly double those from Victoria or Tasmania — a direct consequence of vast distances, thin competition, and the economics of serving remote Australia.
+    </p>
+
+    <div class="chart-card">
+      <div class="chart-title">Average real fare by state/territory of departure, 2024 (inflation-adjusted AUD)</div>
+      <div class="chart-sub">Each state coloured by the average real fare across all routes departing from airports in that state. Darker blue = higher average fares. ACT is shown as a separate territory. Hover over a state for the exact figure. Source: derived from BITRE Domestic Fares.</div>
+      <div class="chart-wrap" id="chart-choropleth"></div>
+    </div>
+
+    <div class="chart-card">
+      <div class="chart-title">Fare change by airport, 2010–2024 (real 2024 AUD)</div>
+      <div class="chart-sub">Circle size = magnitude of average real fare change. <span style="color:#08306b;font-weight:600">Dark blue</span> = fares increased; <span style="color:#c0392b;font-weight:600">red</span> = fares decreased. Derived from BITRE Domestic Fares — averaged across all routes serving each airport. Hover for details.</div>
+      <div class="chart-wrap" id="chart-symbol-map"></div>
+    </div>
+
+    <div class="callout">
+      <strong>Why has Canberra risen so sharply?</strong> The collapse of Rex Airlines in 2024 was particularly felt on Canberra routes. With Rex gone and Virgin and Qantas as the only remaining carriers, reduced competition has pushed average fares above $400 — the highest on record for CBR.
+    </div>
+  </section>
+
+  <!-- ══ SECTION 03 — FARE TRENDS ══════════════════════════════ -->
+  <section class="section" id="trends">
+    <div class="section-header">
+      <span class="section-number">03</span>
+      <hr class="section-rule">
+    </div>
     <h2>Are Fares Getting Cheaper?</h2>
     <p class="section-intro">
-      Adjusted for inflation, fares on the Melbourne–Sydney route more than doubled during COVID before easing back. But in real terms, many routes are actually <em>more expensive</em> in 2024 than in 2010 — driven by reduced competition after the collapse of Rex Airlines and Bonza in 2024.
+      Adjusted for inflation, domestic fares fell steadily through the 2010s as low-cost carriers expanded. COVID reversed that entirely — real fares on many routes more than doubled. Most have since recovered, but in real terms <em>many routes are more expensive in 2024 than in 2010</em> — driven by the collapse of Rex Airlines and Bonza in 2024.
     </p>
 
     <div class="chart-card">
@@ -395,39 +418,39 @@
     </div>
   </section>
 
-  <!-- ══ SECTION 03 — ROUTE VALUE ══════════════════════════════ -->
+  <!-- ══ SECTION 04 — ROUTE VALUE ══════════════════════════════ -->
   <section class="section" id="routes">
     <div class="section-header">
-      <span class="section-number">03</span>
+      <span class="section-number">04</span>
       <hr class="section-rule">
     </div>
-    <h2>Which Routes Are Good Value?</h2>
+    <h2>Which Routes Have Changed Most?</h2>
     <p class="section-intro">
-      There is a clear inverse relationship between distance and fare per kilometre — long-haul routes are far cheaper per km than short hops. Flying Perth–Sydney costs roughly <strong>$0.19 per km</strong>, while the Canberra–Melbourne shuttle costs over <strong>$0.56 per km</strong>.
+      The trend story plays out very differently route by route. Short regional hops are consistently the worst value per kilometre, while long-haul routes benefit from economies of scale and stronger competition. And when you compare 2010 to 2024, the winners and losers are not always who you'd expect.
     </p>
-
-    <div class="chart-card">
-      <div class="chart-title">Distance vs. average real fare — all major routes (2024)</div>
-      <div class="chart-sub">Each dot = one route. Colour encodes fare per km (darker blue = worse value per km). Dashed line = linear trend. Hover for route details.</div>
-      <div class="chart-wrap" id="chart-scatter"></div>
-    </div>
 
     <div class="chart-card">
       <div class="chart-title">Real fare change — 2010 vs 2024 (inflation-adjusted)</div>
       <div class="chart-sub">Dark blue dot = 2024 fare, light blue dot = 2010 fare. A dark dot to the <em>right</em> of the light dot means the real fare has risen over 14 years. Many routes are more expensive in real terms today.</div>
       <div class="chart-wrap" id="chart-dumbbell"></div>
     </div>
+
+    <div class="chart-card">
+      <div class="chart-title">Distance vs. average real fare — all major routes (2024)</div>
+      <div class="chart-sub">Each dot = one route. Colour encodes fare per km (darker blue = worse value per km). Dashed line = linear trend. Hover for route details.</div>
+      <div class="chart-wrap" id="chart-scatter"></div>
+    </div>
   </section>
 
-  <!-- ══ SECTION 04 — SEASONALITY ══════════════════════════════ -->
+  <!-- ══ SECTION 05 — SEASONALITY ══════════════════════════════ -->
   <section class="section" id="seasons">
     <div class="section-header">
-      <span class="section-number">04</span>
+      <span class="section-number">05</span>
       <hr class="section-rule">
     </div>
     <h2>When Is the Cheapest Time to Fly?</h2>
     <p class="section-intro">
-      Domestic fares follow clear seasonal rhythms. <strong>February is consistently the cheapest month</strong> on the Melbourne–Sydney route. April and December school holidays push prices higher. COVID shattered this pattern in 2020 — prices spiked even as passenger numbers collapsed.
+      Knowing that fares vary by route and by geography, the next question for any traveller is <em>when</em> to fly. Domestic fares follow clear seasonal rhythms. <strong>February is consistently the cheapest month</strong> on the Melbourne–Sydney route. April and December school holidays push prices higher. COVID shattered this pattern in 2020 — prices spiked even as passenger numbers collapsed.
     </p>
 
     <div class="chart-card">
@@ -443,28 +466,26 @@
     </div>
   </section>
 
-  <!-- ══ SECTION 05 — PASSENGERS (all three charts stacked vertically, full width) ══ -->
+  <!-- ══ SECTION 06 — PASSENGERS ════════════════════════════════ -->
   <section class="section" id="passengers">
     <div class="section-header">
-      <span class="section-number">05</span>
+      <span class="section-number">06</span>
       <hr class="section-rule">
     </div>
     <h2>How Busy Are Australia's Skies?</h2>
     <p class="section-intro">
-      The Melbourne–Sydney corridor has grown almost continuously since deregulation in the 1980s — until COVID brought it to a near-complete halt in April 2020. The recovery was remarkably fast. By 2023, monthly passenger numbers were back above pre-COVID levels, setting new records by 2024.
+      Fares don't exist in isolation — they reflect the balance between seat supply and passenger demand. The Melbourne–Sydney corridor has grown almost continuously since deregulation in the 1980s, until COVID brought it to a near-complete halt. The recovery was fast: by 2023 passenger numbers were back above pre-COVID levels, and load factors suggest airlines are running full planes at higher prices.
     </p>
 
-    <!-- Passenger trips - full width -->
     <div class="chart-card">
       <div class="chart-title">Monthly passenger trips — Melbourne–Sydney, 1984–2025</div>
       <div class="chart-sub">Shaded band = COVID disruption window. The Ansett collapse (2001) caused a smaller, earlier dip. Source: BITRE Domestic Airline Activity — Top Routes.</div>
       <div class="chart-wrap" id="chart-passengers"></div>
     </div>
 
-    <!-- Seat load factor - full width -->
     <div class="chart-card">
       <div class="chart-title">Seat load factor — Melbourne–Sydney, 1984–2025</div>
-      <div class="chart-sub">% of seats filled per flight. Above 80% is commercially healthy. COVID dropped this below 50% in 2020.</div>
+      <div class="chart-sub">% of seats filled per flight. Above 80% is commercially healthy. COVID dropped this below 50% in 2020; post-COVID airlines have pulled capacity, keeping load factors high and sustaining fare pressure.</div>
       <div class="chart-wrap" id="chart-loadfactor"></div>
       <div class="threshold-legend">
         <span class="threshold-line"></span>
@@ -472,10 +493,9 @@
       </div>
     </div>
 
-    <!-- Aircraft trips - full width -->
     <div class="chart-card">
       <div class="chart-title">Aircraft trips — Melbourne–Sydney, 1984–2025</div>
-      <div class="chart-sub">Monthly flight count reflects both demand and fleet decisions by airlines.</div>
+      <div class="chart-sub">Monthly flight count reflects both demand growth and fleet decisions by airlines. Post-COVID aircraft trips have not fully recovered to 2019 peaks, even as passengers have — airlines are running fuller planes.</div>
       <div class="chart-wrap" id="chart-aircraft"></div>
     </div>
   </section>
@@ -493,7 +513,7 @@
 </div><!-- /page -->
 
 <script>
-// ── Shared Vega-Lite theme (blue palette) ─────────────────────────
+// ── Shared Vega-Lite theme (blue palette) with larger fonts ─────
 const CFG = {
   background: "#ffffff",
   view: { stroke: "transparent" },
@@ -507,18 +527,18 @@ const CFG = {
     titleColor: "#3d4a6a",
     labelFont: "Inter, sans-serif",
     titleFont: "Inter, sans-serif",
-    labelFontSize: 11,
-    titleFontSize: 11,
-    titlePadding: 10,
-    labelPadding: 4
+    labelFontSize: 14,
+    titleFontSize: 14,
+    titlePadding: 12,
+    labelPadding: 6
   },
   legend: {
     labelColor: "#3d4a6a",
     titleColor: "#1c2340",
     labelFont: "Inter, sans-serif",
     titleFont: "Inter, sans-serif",
-    labelFontSize: 11,
-    titleFontSize: 11,
+    labelFontSize: 13,
+    titleFontSize: 14,
     titleFontWeight: 600
   }
 };
@@ -534,6 +554,7 @@ const F_TOP      = "top_routes.csv";
 const F_AIRPORTS = "airports.csv";
 const F_TOPO     = "ne_110m_admin_0_countries.json";
 
+
 // ── Blue palette constants ────────────────────────────────────────
 const B_DARK   = "#08306b";
 const B_MID    = "#2171b5";
@@ -542,12 +563,12 @@ const B_PALE   = "#c6dbef";
 const ACCENT   = "#c0392b";
 
 // =================================================================
-// CHART 1 — Route flow map
+// CHART 1 — Route flow map (larger, reduced opacity for clarity)
 // =================================================================
 const specMap = {
   "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
-  "width": "container", "height": 420,
-  "projection": { "type": "mercator", "center": [134, -28], "scale": 600 },
+  "width": "container", "height": 650,
+  "projection": { "type": "mercator", "center": [134, -28], "scale": 950 },
   "layer": [
     {
       "data": { "url": F_TOPO, "format": { "type": "topojson", "feature": "ne_110m_admin_0_countries" } },
@@ -555,53 +576,36 @@ const specMap = {
     },
     {
       "data": { "url": F_TOP },
-      "mark": { "type": "rule", "opacity": 0.75 },
+      "mark": { "type": "rule", "opacity": 0.6 },
       "encoding": {
         "longitude":  { "field": "Lon1", "type": "quantitative" },
         "latitude":   { "field": "Lat1", "type": "quantitative" },
         "longitude2": { "field": "Lon2" },
         "latitude2":  { "field": "Lat2" },
-        "strokeWidth": {
-          "field": "Passengers_2024", "type": "quantitative",
-          "scale": { "range": [1, 9], "domain": [900000, 8100000] }, "legend": null
-        },
-        "color": {
-          "field": "Passengers_2024", "type": "quantitative",
-          "scale": { "scheme": "blues", "domain": [900000, 8100000] }, "legend": null
-        },
-        "tooltip": [
-          { "field": "Route", "title": "Route" },
-          { "field": "Passengers_2024", "title": "Passengers (2024)", "format": ",.0f" }
-        ]
+        "strokeWidth": { "field": "Passengers_2024", "type": "quantitative", "scale": { "range": [1, 10], "domain": [900000, 8100000] }, "legend": null },
+        "color": { "field": "Passengers_2024", "type": "quantitative", "scale": { "scheme": "blues", "domain": [900000, 8100000] }, "legend": null },
+        "tooltip": [{ "field": "Route", "title": "Route" }, { "field": "Passengers_2024", "title": "Passengers (2024)", "format": ",.0f" }]
       }
     },
     {
       "data": { "url": F_AIRPORTS },
-      "mark": { "type": "circle", "color": ACCENT, "opacity": 0.9, "stroke": "#fff", "strokeWidth": 1.8, "size": 65 },
-      "encoding": {
-        "longitude": { "field": "Lon", "type": "quantitative" },
-        "latitude":  { "field": "Lat", "type": "quantitative" },
-        "tooltip":   [{ "field": "Name", "title": "Airport" }]
-      }
+      "mark": { "type": "circle", "color": ACCENT, "opacity": 0.9, "stroke": "#fff", "strokeWidth": 1.8, "size": 100 },
+      "encoding": { "longitude": { "field": "Lon" }, "latitude": { "field": "Lat" }, "tooltip": [{ "field": "Name", "title": "Airport" }] }
     },
     {
       "data": { "url": F_AIRPORTS },
-      "mark": { "type": "text", "dy": -13, "fontSize": 10, "fontWeight": 500, "color": "#1c2340", "font": "Inter, sans-serif" },
-      "encoding": {
-        "longitude": { "field": "Lon", "type": "quantitative" },
-        "latitude":  { "field": "Lat", "type": "quantitative" },
-        "text":      { "field": "Name" }
-      }
+      "mark": { "type": "text", "dy": -18, "fontSize": 12, "fontWeight": 500, "color": "#1c2340", "font": "Inter, sans-serif" },
+      "encoding": { "longitude": { "field": "Lon" }, "latitude": { "field": "Lat" }, "text": { "field": "Name" } }
     }
   ]
 };
 
 // =================================================================
-// CHART 2 — Top routes bar
+// CHART 2 — Top routes bar (height increased)
 // =================================================================
 const specTopRoutesBar = {
   "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
-  "width": "container", "height": 260,
+  "width": "container", "height": 360,
   "data": { "url": F_TOP },
   "transform": [
     { "sort": [{ "field": "Passengers_2024", "order": "descending" }], "window": [{ "op": "rank", "as": "rank" }] },
@@ -610,27 +614,19 @@ const specTopRoutesBar = {
   ],
   "mark": { "type": "bar", "color": B_MID, "cornerRadiusEnd": 3, "height": { "band": 0.65 } },
   "encoding": {
-    "y": { "field": "Route", "type": "nominal", "sort": "-x", "title": null,
-           "axis": { "labelFontSize": 10, "labelLimit": 200 } },
-    "x": { "field": "Pax_M", "type": "quantitative", "title": "Passengers (millions)",
-           "axis": { "format": ".1f" }, "scale": { "zero": true } },
-    "color": {
-      "field": "Pax_M", "type": "quantitative",
-      "scale": { "scheme": "blues", "domain": [0.8, 8.5] }, "legend": null
-    },
-    "tooltip": [
-      { "field": "Route", "title": "Route" },
-      { "field": "Passengers_2024", "title": "Passengers", "format": ",.0f" }
-    ]
+    "y": { "field": "Route", "type": "nominal", "sort": "-x", "title": null, "axis": { "labelFontSize": 12, "labelLimit": 200 } },
+    "x": { "field": "Pax_M", "type": "quantitative", "title": "Passengers (millions)", "axis": { "format": ".1f", "labelFontSize": 12 }, "scale": { "zero": true } },
+    "color": { "field": "Pax_M", "type": "quantitative", "scale": { "scheme": "blues", "domain": [0.8, 8.5] }, "legend": null },
+    "tooltip": [{ "field": "Route" }, { "field": "Passengers_2024", "title": "Passengers", "format": ",.0f" }]
   }
 };
 
 // =================================================================
-// CHART 3 — Most expensive routes bar
+// CHART 3 — Most expensive routes bar (height increased)
 // =================================================================
 const specExpensive = {
   "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
-  "width": "container", "height": 260,
+  "width": "container", "height": 360,
   "data": { "url": F_ROUTES },
   "transform": [
     { "sort": [{ "field": "Real_2024", "order": "descending" }], "window": [{ "op": "rank", "as": "rank" }] },
@@ -638,105 +634,65 @@ const specExpensive = {
   ],
   "mark": { "type": "bar", "cornerRadiusEnd": 3, "height": { "band": 0.65 } },
   "encoding": {
-    "y": { "field": "Route", "type": "nominal", "sort": "-x", "title": null,
-           "axis": { "labelFontSize": 10, "labelLimit": 200 } },
-    "x": { "field": "Real_2024", "type": "quantitative", "title": "Avg real fare ($AUD 2024)",
-           "axis": { "format": "$,.0f" }, "scale": { "zero": true } },
-    "color": {
-      "field": "Real_2024", "type": "quantitative",
-      "scale": { "scheme": "blues", "domain": [100, 750] }, "legend": null
-    },
-    "tooltip": [
-      { "field": "Route", "title": "Route" },
-      { "field": "Real_2024", "title": "Avg Fare 2024", "format": "$,.0f" },
-      { "field": "Real_2010", "title": "Avg Fare 2010", "format": "$,.0f" }
-    ]
+    "y": { "field": "Route", "type": "nominal", "sort": "-x", "title": null, "axis": { "labelFontSize": 12, "labelLimit": 200 } },
+    "x": { "field": "Real_2024", "type": "quantitative", "title": "Avg real fare ($AUD 2024)", "axis": { "format": "$,.0f", "labelFontSize": 12 }, "scale": { "zero": true } },
+    "color": { "field": "Real_2024", "type": "quantitative", "scale": { "scheme": "blues", "domain": [100, 750] }, "legend": null },
+    "tooltip": [{ "field": "Route" }, { "field": "Real_2024", "title": "Avg Fare 2024", "format": "$,.0f" }, { "field": "Real_2010", "title": "Avg Fare 2010", "format": "$,.0f" }]
   }
 };
 
 // =================================================================
-// CHART 4 — Multi-line fare trend
+// CHART 4 — Multi-line fare trend (height increased)
 // =================================================================
 const specTrend = {
   "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
-  "width": "container", "height": 320,
+  "width": "container", "height": 420,
   "data": { "url": F_ANNUAL },
   "layer": [
     {
       "mark": { "type": "rect", "opacity": 0.07, "color": "#333" },
       "data": { "values": [{ "x1": "2020", "x2": "2022" }] },
-      "encoding": {
-        "x":  { "field": "x1", "type": "ordinal" },
-        "x2": { "field": "x2" }
-      }
+      "encoding": { "x": { "field": "x1", "type": "ordinal" }, "x2": { "field": "x2" } }
     },
     {
       "data": { "values": [{ "x": "2020", "y": 560, "t": "COVID-19" }] },
-      "mark": { "type": "text", "align": "left", "dx": 4, "fontSize": 10, "color": "#999", "fontStyle": "italic" },
-      "encoding": {
-        "x": { "field": "x", "type": "ordinal" },
-        "y": { "field": "y", "type": "quantitative" },
-        "text": { "field": "t" }
-      }
+      "mark": { "type": "text", "align": "left", "dx": 4, "fontSize": 12, "color": "#999", "fontStyle": "italic" },
+      "encoding": { "x": { "field": "x", "type": "ordinal" }, "y": { "field": "y", "type": "quantitative" }, "text": { "field": "t" } }
     },
     {
       "params": [{ "name": "route_sel", "select": { "type": "point", "fields": ["Route"] }, "bind": "legend" }],
-      "mark": { "type": "line", "strokeWidth": 2.2, "interpolate": "monotone", "point": { "filled": true, "size": 35 } },
+      "mark": { "type": "line", "strokeWidth": 2.5, "interpolate": "monotone", "point": { "filled": true, "size": 45 } },
       "encoding": {
-        "x": { "field": "Year", "type": "ordinal", "title": null,
-               "axis": { "labelAngle": -45, "labelFontSize": 10, "grid": true } },
-        "y": { "field": "Real_Fare", "type": "quantitative", "title": "Real fare (2024 AUD)",
-               "axis": { "format": "$,.0f" }, "scale": { "zero": false } },
-        "color": {
-          "field": "Route", "type": "nominal",
-          "scale": { "scheme": "blues" },
-          "legend": { "title": "Route — click to isolate", "orient": "bottom", "columns": 3, "symbolSize": 80 }
-        },
+        "x": { "field": "Year", "type": "ordinal", "title": null, "axis": { "labelAngle": -45, "labelFontSize": 12, "grid": true } },
+        "y": { "field": "Real_Fare", "type": "quantitative", "title": "Real fare (2024 AUD)", "axis": { "format": "$,.0f", "labelFontSize": 12 }, "scale": { "zero": false } },
+        "color": { "field": "Route", "type": "nominal", "scale": { "scheme": "blues" }, "legend": { "title": "Route — click to isolate", "orient": "bottom", "columns": 3, "symbolSize": 80, "labelFontSize": 12, "titleFontSize": 13 } },
         "opacity": { "condition": { "param": "route_sel", "value": 1 }, "value": 0.1 },
-        "tooltip": [
-          { "field": "Route" }, { "field": "Year" },
-          { "field": "Real_Fare", "title": "Real Fare", "format": "$,.0f" }
-        ]
+        "tooltip": [{ "field": "Route" }, { "field": "Year" }, { "field": "Real_Fare", "title": "Real Fare", "format": "$,.0f" }]
       }
     }
   ]
 };
 
 // =================================================================
-// CHART 5 — Annotated MEL-SYD area chart
+// CHART 5 — Annotated MEL-SYD area chart (height increased)
 // =================================================================
 const specAnnotated = {
   "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
-  "width": "container", "height": 300,
+  "width": "container", "height": 400,
   "data": { "url": F_SEASON },
-  "transform": [
-    { "calculate": "datetime(datum.Year, datum.Month - 1, 1)", "as": "date" }
-  ],
+  "transform": [{ "calculate": "datetime(datum.Year, datum.Month - 1, 1)", "as": "date" }],
   "layer": [
     {
       "data": { "values": [{ "x1": "2020-03-01", "x2": "2022-01-01" }] },
       "mark": { "type": "rect", "opacity": 0.07, "color": "#333" },
-      "encoding": {
-        "x":  { "field": "x1", "type": "temporal" },
-        "x2": { "field": "x2", "type": "temporal" }
-      }
+      "encoding": { "x": { "field": "x1", "type": "temporal" }, "x2": { "field": "x2", "type": "temporal" } }
     },
     {
-      "mark": {
-        "type": "area", "color": B_MID, "fillOpacity": 0.15,
-        "line": { "color": B_DARK, "strokeWidth": 1.8 },
-        "interpolate": "monotone"
-      },
+      "mark": { "type": "area", "color": B_MID, "fillOpacity": 0.15, "line": { "color": B_DARK, "strokeWidth": 1.8 }, "interpolate": "monotone" },
       "encoding": {
-        "x": { "field": "date", "type": "temporal", "title": null,
-               "axis": { "format": "%Y", "tickCount": "year", "labelAngle": -45 } },
-        "y": { "field": "Real_Fare", "type": "quantitative",
-               "title": "Real fare, MEL–SYD ($2024)",
-               "axis": { "format": "$,.0f" }, "scale": { "zero": true, "domain": [0, 500] } },
-        "tooltip": [
-          { "field": "Year" }, { "field": "Month_Name", "title": "Month" },
-          { "field": "Real_Fare", "title": "Real Fare", "format": "$,.0f" }
-        ]
+        "x": { "field": "date", "type": "temporal", "title": null, "axis": { "format": "%Y", "tickCount": "year", "labelAngle": -45, "labelFontSize": 12 } },
+        "y": { "field": "Real_Fare", "type": "quantitative", "title": "Real fare, MEL–SYD ($2024)", "axis": { "format": "$,.0f", "labelFontSize": 12 }, "scale": { "zero": true, "domain": [0, 500] } },
+        "tooltip": [{ "field": "Year" }, { "field": "Month_Name", "title": "Month" }, { "field": "Real_Fare", "title": "Real Fare", "format": "$,.0f" }]
       }
     },
     {
@@ -756,131 +712,86 @@ const specAnnotated = {
         { "d": "2022-02-01", "y": 440, "label": "Borders reopen" },
         { "d": "2024-06-01", "y": 440, "label": "Rex & Bonza collapse" }
       ]},
-      "mark": { "type": "text", "align": "left", "dx": 4, "dy": -6,
-                "fontSize": 9.5, "color": "#8899bb", "fontStyle": "italic" },
-      "encoding": {
-        "x":    { "field": "d", "type": "temporal" },
-        "y":    { "field": "y", "type": "quantitative" },
-        "text": { "field": "label" }
-      }
+      "mark": { "type": "text", "align": "left", "dx": 4, "dy": -6, "fontSize": 11, "color": "#8899bb", "fontStyle": "italic" },
+      "encoding": { "x": { "field": "d", "type": "temporal" }, "y": { "field": "y", "type": "quantitative" }, "text": { "field": "label" } }
     }
   ]
 };
 
 // =================================================================
-// CHART 6 — Scatter: distance vs fare
+// CHART 6 — Scatter: distance vs fare (height increased)
 // =================================================================
 const specScatter = {
   "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
-  "width": "container", "height": 340,
+  "width": "container", "height": 440,
   "data": { "url": F_ROUTES },
   "layer": [
     {
       "mark": { "type": "line", "strokeDash": [5,4], "color": "#c6dbef", "strokeWidth": 1.5 },
       "transform": [{ "regression": "Real_2024", "on": "Distance_km" }],
-      "encoding": {
-        "x": { "field": "Distance_km", "type": "quantitative" },
-        "y": { "field": "Real_2024",   "type": "quantitative" }
-      }
+      "encoding": { "x": { "field": "Distance_km", "type": "quantitative" }, "y": { "field": "Real_2024", "type": "quantitative" } }
     },
     {
-      "mark": { "type": "point", "filled": true, "size": 85, "opacity": 0.82,
-                "stroke": "#fff", "strokeWidth": 1 },
+      "mark": { "type": "point", "filled": true, "size": 110, "opacity": 0.82, "stroke": "#fff", "strokeWidth": 1 },
       "encoding": {
-        "x": { "field": "Distance_km", "type": "quantitative",
-               "title": "Route distance (km)", "axis": { "format": ",.0f" } },
-        "y": { "field": "Real_2024", "type": "quantitative",
-               "title": "Avg real fare 2024 ($AUD)",
-               "axis": { "format": "$,.0f" }, "scale": { "zero": true } },
-        "color": {
-          "field": "Fare_Per_km", "type": "quantitative",
-          "scale": { "scheme": "blues", "domain": [0.1, 1.1] },
-          "legend": { "title": "$/km", "format": "$,.2f", "orient": "right" }
-        },
-        "tooltip": [
-          { "field": "Route", "title": "Route" },
-          { "field": "Distance_km", "title": "Distance (km)", "format": ",.0f" },
-          { "field": "Real_2024", "title": "Avg Fare 2024", "format": "$,.0f" },
-          { "field": "Fare_Per_km", "title": "$/km", "format": "$,.2f" }
-        ]
+        "x": { "field": "Distance_km", "type": "quantitative", "title": "Route distance (km)", "axis": { "format": ",.0f", "labelFontSize": 12 } },
+        "y": { "field": "Real_2024", "type": "quantitative", "title": "Avg real fare 2024 ($AUD)", "axis": { "format": "$,.0f", "labelFontSize": 12 }, "scale": { "zero": true } },
+        "color": { "field": "Fare_Per_km", "type": "quantitative", "scale": { "scheme": "blues", "domain": [0.1, 1.1] }, "legend": { "title": "$/km", "format": "$,.2f", "orient": "right", "labelFontSize": 12, "titleFontSize": 13 } },
+        "tooltip": [{ "field": "Route" }, { "field": "Distance_km", "title": "Distance (km)", "format": ",.0f" }, { "field": "Real_2024", "title": "Avg Fare 2024", "format": "$,.0f" }, { "field": "Fare_Per_km", "title": "$/km", "format": "$,.2f" }]
       }
     }
   ]
 };
 
 // =================================================================
-// CHART 7 — Dumbbell: 2010 vs 2024
+// CHART 7 — Dumbbell: 2010 vs 2024 (height increased)
 // =================================================================
 const DUMBBELL_ROUTES = [
   "Melbourne - Sydney","Brisbane - Sydney","Brisbane - Melbourne",
   "Perth - Sydney","Melbourne - Perth","Adelaide - Melbourne",
-  "Canberra - Melbourne","Melbourne - Hobart",
-  "Brisbane - Cairns","Adelaide - Sydney",
+  "Canberra - Melbourne","Melbourne - Hobart","Brisbane - Cairns","Adelaide - Sydney",
   "Cairns - Sydney","Brisbane - Perth"
 ];
 
 const specDumbbell = {
   "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
-  "width": "container", "height": 340,
+  "width": "container", "height": 440,
   "data": { "url": F_ROUTES },
   "transform": [{ "filter": { "field": "Route", "oneOf": DUMBBELL_ROUTES } }],
   "layer": [
     {
       "mark": { "type": "rule", "strokeWidth": 2, "color": B_PALE },
-      "encoding": {
-        "y":  { "field": "Route", "type": "nominal", "sort": { "field": "Real_2024", "order": "descending" }, "title": null },
-        "x":  { "field": "Real_2010", "type": "quantitative", "title": null },
-        "x2": { "field": "Real_2024" }
-      }
+      "encoding": { "y": { "field": "Route", "type": "nominal", "sort": { "field": "Real_2024", "order": "descending" }, "title": null, "axis": { "labelFontSize": 12 } }, "x": { "field": "Real_2010" }, "x2": { "field": "Real_2024" } }
     },
     {
-      "mark": { "type": "point", "filled": true, "size": 75, "color": B_LIGHT, "stroke": "#fff", "strokeWidth": 1 },
-      "encoding": {
-        "y": { "field": "Route", "type": "nominal", "sort": { "field": "Real_2024", "order": "descending" }, "title": null },
-        "x": { "field": "Real_2010", "type": "quantitative",
-               "title": "Real fare ($AUD 2024)", "axis": { "format": "$,.0f" }, "scale": { "zero": false } },
-        "tooltip": [{ "field": "Route" }, { "field": "Real_2010", "title": "Fare 2010", "format": "$,.0f" }]
-      }
+      "mark": { "type": "point", "filled": true, "size": 100, "color": B_LIGHT, "stroke": "#fff", "strokeWidth": 1 },
+      "encoding": { "y": { "field": "Route", "type": "nominal", "sort": { "field": "Real_2024", "order": "descending" }, "title": null, "axis": { "labelFontSize": 12 } }, "x": { "field": "Real_2010", "title": "Real fare ($AUD 2024)", "axis": { "format": "$,.0f", "labelFontSize": 12 }, "scale": { "zero": false } }, "tooltip": [{ "field": "Route" }, { "field": "Real_2010", "title": "Fare 2010", "format": "$,.0f" }] }
     },
     {
-      "mark": { "type": "point", "filled": true, "size": 75, "color": B_DARK, "stroke": "#fff", "strokeWidth": 1 },
-      "encoding": {
-        "y": { "field": "Route", "type": "nominal", "sort": { "field": "Real_2024", "order": "descending" }, "title": null },
-        "x": { "field": "Real_2024", "type": "quantitative",
-               "title": "Real fare ($AUD 2024)", "axis": { "format": "$,.0f" } },
-        "tooltip": [{ "field": "Route" }, { "field": "Real_2024", "title": "Fare 2024", "format": "$,.0f" }]
-      }
+      "mark": { "type": "point", "filled": true, "size": 100, "color": B_DARK, "stroke": "#fff", "strokeWidth": 1 },
+      "encoding": { "y": { "field": "Route", "type": "nominal", "sort": { "field": "Real_2024", "order": "descending" }, "title": null, "axis": { "labelFontSize": 12 } }, "x": { "field": "Real_2024", "title": "Real fare ($AUD 2024)", "axis": { "format": "$,.0f", "labelFontSize": 12 } }, "tooltip": [{ "field": "Route" }, { "field": "Real_2024", "title": "Fare 2024", "format": "$,.0f" }] }
     }
   ]
 };
 
 // =================================================================
-// CHART 8 — Heatmap
+// CHART 8 — Heatmap (height increased)
 // =================================================================
 const specHeatmap = {
   "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
-  "width": "container", "height": 230,
+  "width": "container", "height": 320,
   "data": { "url": F_SEASON },
   "mark": { "type": "rect", "cornerRadius": 1 },
   "encoding": {
-    "x": { "field": "Month_Name", "type": "ordinal",
-           "sort": ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"],
-           "title": null, "axis": { "labelAngle": 0, "labelFontSize": 11 } },
-    "y": { "field": "Year", "type": "ordinal", "title": null },
-    "color": {
-      "field": "Real_Fare", "type": "quantitative",
-      "scale": { "scheme": "blues", "domain": [80, 450] },
-      "legend": { "title": "Real fare ($)", "format": "$,.0f", "orient": "right" }
-    },
-    "tooltip": [
-      { "field": "Year" }, { "field": "Month_Name", "title": "Month" },
-      { "field": "Real_Fare", "title": "Real Fare", "format": "$,.0f" }
-    ]
+    "x": { "field": "Month_Name", "type": "ordinal", "sort": ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"], "title": null, "axis": { "labelAngle": 0, "labelFontSize": 13 } },
+    "y": { "field": "Year", "type": "ordinal", "title": null, "axis": { "labelFontSize": 12 } },
+    "color": { "field": "Real_Fare", "type": "quantitative", "scale": { "scheme": "blues", "domain": [80, 450] }, "legend": { "title": "Real fare ($)", "format": "$,.0f", "orient": "right", "labelFontSize": 12, "titleFontSize": 13 } },
+    "tooltip": [{ "field": "Year" }, { "field": "Month_Name", "title": "Month" }, { "field": "Real_Fare", "title": "Real Fare", "format": "$,.0f" }]
   }
 };
 
 // =================================================================
-// CHART 9 — Small multiples
+// CHART 9 — Small multiples (height increased)
 // =================================================================
 const specMultiples = {
   "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
@@ -888,158 +799,180 @@ const specMultiples = {
   "data": { "url": F_SM },
   "facet": {
     "field": "City", "type": "nominal", "columns": 4,
-    "header": {
-      "titleFontSize": 0,
-      "labelFont": "Inter, sans-serif", "labelFontSize": 12,
-      "labelFontWeight": 600, "labelColor": "#1c2340"
-    }
+    "header": { "titleFontSize": 0, "labelFont": "Inter, sans-serif", "labelFontSize": 15, "labelFontWeight": 600, "labelColor": "#1c2340" }
   },
   "spec": {
-    "width": 150, "height": 110,
+    "width": 200, "height": 160,
     "layer": [{
-      "mark": { "type": "area", "color": B_MID, "fillOpacity": 0.18,
-                "line": { "color": B_DARK, "strokeWidth": 1.8 },
-                "interpolate": "monotone" },
+      "mark": { "type": "area", "color": B_MID, "fillOpacity": 0.18, "line": { "color": B_DARK, "strokeWidth": 1.8 }, "interpolate": "monotone" },
       "encoding": {
-        "x": { "field": "Month", "type": "ordinal", "title": null,
-               "axis": { "values": [1,4,7,10],
-                         "labelExpr": "datum.value == 1 ? 'Jan' : datum.value == 4 ? 'Apr' : datum.value == 7 ? 'Jul' : 'Oct'",
-                         "labelFontSize": 9 } },
-        "y": { "field": "Fare", "type": "quantitative", "title": "$",
-               "axis": { "format": "$,.0f", "labelFontSize": 9 }, "scale": { "zero": false } },
-        "tooltip": [
-          { "field": "City" }, { "field": "Month_Name", "title": "Month" },
-          { "field": "Fare", "title": "Avg Fare", "format": "$,.0f" }
-        ]
+        "x": { "field": "Month", "type": "ordinal", "title": null, "axis": { "values": [1,4,7,10], "labelExpr": "datum.value == 1 ? 'Jan' : datum.value == 4 ? 'Apr' : datum.value == 7 ? 'Jul' : 'Oct'", "labelFontSize": 11 } },
+        "y": { "field": "Fare", "type": "quantitative", "title": "$", "axis": { "format": "$,.0f", "labelFontSize": 11 }, "scale": { "zero": false } },
+        "tooltip": [{ "field": "City" }, { "field": "Month_Name", "title": "Month" }, { "field": "Fare", "title": "Avg Fare", "format": "$,.0f" }]
       }
     }]
   }
 };
 
 // =================================================================
-// CHARTS 10, 11, 12 — Passenger / Load Factor / Aircraft (blue)
-// These are the original working specs (no autosize, full width)
+// CHARTS 10,11,12 – Passenger / Load Factor / Aircraft (height increased)
 // =================================================================
-
-const paxXenc = {
-  "field": "date", "type": "temporal", "title": null,
-  "axis": {
-    "format": "%Y",
-    "tickCount": "year",
-    "labelAngle": -45,
-    "grid": false
-  }
-};
+const paxXenc = { "field": "date", "type": "temporal", "title": null, "axis": { "format": "%Y", "tickCount": "year", "labelAngle": -45, "grid": false, "labelFontSize": 12 } };
 
 const specPassengers = {
   "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
-  "width": "container", "height": 300,
+  "width": "container", "height": 400,
   "data": { "url": F_PAX },
-  "transform": [
-    { "calculate": "datetime(datum.Year, datum.Month - 1, 1)", "as": "date" }
-  ],
+  "transform": [{ "calculate": "datetime(datum.Year, datum.Month - 1, 1)", "as": "date" }],
   "layer": [
-    {
-      "data": { "values": [{ "x1": "2020-03-01", "x2": "2022-01-01" }] },
-      "mark": { "type": "rect", "opacity": 0.07, "color": "#333" },
-      "encoding": {
-        "x":  { "field": "x1", "type": "temporal" },
-        "x2": { "field": "x2", "type": "temporal" }
-      }
-    },
-    {
-      "mark": { "type": "area", "color": "#6baed6", "fillOpacity": 0.2,
-                "line": { "color": "#2171b5", "strokeWidth": 1.8 }, "interpolate": "monotone" },
-      "encoding": {
-        "x": paxXenc,
-        "y": {
-          "field": "Passenger_Trips", "type": "quantitative",
-          "title": "Monthly passenger trips",
-          "axis": { "format": ",.0f" }, "scale": { "zero": true }
-        },
-        "tooltip": [
-          { "field": "Year" }, { "field": "Month" },
-          { "field": "Passenger_Trips", "title": "Passengers", "format": ",.0f" }
-        ]
-      }
-    },
-    {
-      "data": { "values": [
-        { "d": "2001-09-01", "y": 760000, "label": "Ansett collapse" },
-        { "d": "2020-03-01", "y": 760000, "label": "COVID-19" }
-      ]},
-      "mark": { "type": "rule", "strokeDash": [3,3], "color": "#bbb", "strokeWidth": 1 },
-      "encoding": { "x": { "field": "d", "type": "temporal" } }
-    },
-    {
-      "data": { "values": [
-        { "d": "2001-09-01", "y": 760000, "label": "Ansett collapse" },
-        { "d": "2020-03-01", "y": 760000, "label": "COVID-19" }
-      ]},
-      "mark": { "type": "text", "align": "left", "dx": 5, "fontSize": 9.5, "color": "#888", "fontStyle": "italic" },
-      "encoding": {
-        "x":    { "field": "d", "type": "temporal" },
-        "y":    { "field": "y", "type": "quantitative" },
-        "text": { "field": "label" }
-      }
-    }
+    { "data": { "values": [{ "x1": "2020-03-01", "x2": "2022-01-01" }] }, "mark": { "type": "rect", "opacity": 0.07, "color": "#333" }, "encoding": { "x": { "field": "x1", "type": "temporal" }, "x2": { "field": "x2", "type": "temporal" } } },
+    { "mark": { "type": "area", "color": "#6baed6", "fillOpacity": 0.2, "line": { "color": "#2171b5", "strokeWidth": 1.8 }, "interpolate": "monotone" }, "encoding": { "x": paxXenc, "y": { "field": "Passenger_Trips", "type": "quantitative", "title": "Monthly passenger trips", "axis": { "format": ",.0f", "labelFontSize": 12 }, "scale": { "zero": true } }, "tooltip": [{ "field": "Year" }, { "field": "Month" }, { "field": "Passenger_Trips", "title": "Passengers", "format": ",.0f" }] } },
+    { "data": { "values": [{ "d": "2001-09-01", "y": 760000, "label": "Ansett collapse" }, { "d": "2020-03-01", "y": 760000, "label": "COVID-19" }] }, "mark": { "type": "rule", "strokeDash": [3,3], "color": "#bbb", "strokeWidth": 1 }, "encoding": { "x": { "field": "d", "type": "temporal" } } },
+    { "data": { "values": [{ "d": "2001-09-01", "y": 760000, "label": "Ansett collapse" }, { "d": "2020-03-01", "y": 760000, "label": "COVID-19" }] }, "mark": { "type": "text", "align": "left", "dx": 5, "fontSize": 11, "color": "#888", "fontStyle": "italic" }, "encoding": { "x": { "field": "d", "type": "temporal" }, "y": { "field": "y", "type": "quantitative" }, "text": { "field": "label" } } }
   ]
 };
 
 const specLoadFactor = {
   "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
-  "width": "container", "height": 320,
+  "width": "container", "height": 400,
   "data": { "url": F_PAX },
-  "transform": [
-    { "calculate": "datetime(datum.Year, datum.Month - 1, 1)", "as": "date" }
-  ],
+  "transform": [{ "calculate": "datetime(datum.Year, datum.Month - 1, 1)", "as": "date" }],
   "layer": [
-    {
-      "data": { "values": [{ "v": 80 }] },
-      "mark": { "type": "rule", "strokeDash": [4,4], "color": "#2c7fb8", "strokeWidth": 1.5 },
-      "encoding": { "y": { "field": "v", "type": "quantitative" } }
-    },
-    {
-      "mark": { "type": "line", "color": "#08519c", "strokeWidth": 1.8, "interpolate": "monotone" },
-      "encoding": {
-        "x": paxXenc,
-        "y": {
-          "field": "Load_Factor", "type": "quantitative",
-          "title": "Load factor (%)", "scale": { "domain": [20, 100] }
-        },
-        "tooltip": [
-          { "field": "Year" }, { "field": "Month" },
-          { "field": "Load_Factor", "title": "Load factor (%)", "format": ".1f" }
-        ]
-      }
-    }
+    { "data": { "values": [{ "v": 80 }] }, "mark": { "type": "rule", "strokeDash": [4,4], "color": "#2c7fb8", "strokeWidth": 1.5 }, "encoding": { "y": { "field": "v", "type": "quantitative" } } },
+    { "mark": { "type": "line", "color": "#08519c", "strokeWidth": 1.8, "interpolate": "monotone" }, "encoding": { "x": paxXenc, "y": { "field": "Load_Factor", "type": "quantitative", "title": "Load factor (%)", "axis": { "labelFontSize": 12 }, "scale": { "domain": [20, 100] } }, "tooltip": [{ "field": "Year" }, { "field": "Month" }, { "field": "Load_Factor", "title": "Load factor (%)", "format": ".1f" }] } }
   ]
 };
 
 const specAircraft = {
   "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
-  "width": "container", "height": 320,
+  "width": "container", "height": 400,
   "data": { "url": F_PAX },
-  "transform": [
-    { "calculate": "datetime(datum.Year, datum.Month - 1, 1)", "as": "date" }
-  ],
+  "transform": [{ "calculate": "datetime(datum.Year, datum.Month - 1, 1)", "as": "date" }],
   "mark": { "type": "line", "color": "#08519c", "strokeWidth": 1.8, "interpolate": "monotone" },
+  "encoding": { "x": paxXenc, "y": { "field": "Aircraft_Trips", "type": "quantitative", "title": "Aircraft trips (monthly)", "axis": { "format": ",.0f", "labelFontSize": 12 }, "scale": { "zero": true } }, "tooltip": [{ "field": "Year" }, { "field": "Month" }, { "field": "Aircraft_Trips", "title": "Aircraft trips", "format": ",.0f" }] }
+};
+
+// =================================================================
+// CHART 13 — Choropleth (larger)
+// =================================================================
+const STATE_FARES = [
+  { state: "Western Australia",        state_abbr: "WA",  Avg_Fare: 708.5, Routes: 15 },
+  { state: "Northern Territory",       state_abbr: "NT",  Avg_Fare: 653.0, Routes: 7  },
+  { state: "Australian Capital Territory", state_abbr: "ACT", Avg_Fare: 414.6, Routes: 4 },
+  { state: "South Australia",          state_abbr: "SA",  Avg_Fare: 431.7, Routes: 10 },
+  { state: "Queensland",               state_abbr: "QLD", Avg_Fare: 400.0, Routes: 40 },
+  { state: "New South Wales",          state_abbr: "NSW", Avg_Fare: 340.4, Routes: 31 },
+  { state: "Victoria",                 state_abbr: "VIC", Avg_Fare: 327.7, Routes: 15 },
+  { state: "Tasmania",                 state_abbr: "TAS", Avg_Fare: 278.1, Routes: 6  }
+];
+
+const specChoropleth = {
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "width": "container", "height": 650,
+  "projection": { "type": "mercator", "center": [134, -28], "scale": 700 },
+  "data": {
+    "url": "states.json",
+    "format": { "type": "topojson", "feature": "states" } 
+  },
+  "transform": [
+    {
+      "lookup": "properties.STATE_NAME", 
+      "from": {
+        "data": { "values": STATE_FARES },
+        "key": "state",
+        "fields": ["Avg_Fare", "state_abbr", "Routes"]
+      }
+    }
+  ],
+  "mark": { "type": "geoshape", "stroke": "#ffffff", "strokeWidth": 1.5 },
   "encoding": {
-    "x": paxXenc,
-    "y": {
-      "field": "Aircraft_Trips", "type": "quantitative",
-      "title": "Aircraft trips (monthly)",
-      "axis": { "format": ",.0f" }, "scale": { "zero": true }
+    "color": {
+      "field": "Avg_Fare", "type": "quantitative",
+      "scale": { "scheme": "blues", "domain": [250, 750] },
+      "legend": { "title": "Avg real fare ($AUD 2024)", "format": "$,.0f", "orient": "right", "gradientLength": 200, "labelFontSize": 12, "titleFontSize": 13 }
     },
     "tooltip": [
-      { "field": "Year" }, { "field": "Month" },
-      { "field": "Aircraft_Trips", "title": "Aircraft trips", "format": ",.0f" }
+      { "field": "state_abbr", "title": "State/Territory" },
+      { "field": "Avg_Fare", "title": "Avg Fare 2024", "format": "$,.0f" },
+      { "field": "Routes", "title": "Routes tracked" }
     ]
   }
 };
 
 // =================================================================
-// EMBED ALL
+// CHART 14 — Proportional symbol map (larger, Canberra visible)
+// =================================================================
+  const AIRPORT_CHANGE = [
+  { Name: "Melbourne",  Lat: -37.674, Lon: 144.843, Avg_2024: 324.7, Avg_2010: 272.9, Change:  51.8, Routes: 14, dx: -45, dy:  10 }, 
+  { Name: "Sydney",     Lat: -33.946, Lon: 151.177, Avg_2024: 353.4, Avg_2010: 362.6, Change:  -9.3, Routes: 21, dx:  22, dy: -10 }, 
+  { Name: "Brisbane",   Lat: -27.384, Lon: 153.118, Avg_2024: 422.0, Avg_2010: 377.0, Change:  45.1, Routes: 18, dx:  22, dy: -14 }, 
+  { Name: "Gold Coast", Lat: -28.164, Lon: 153.504, Avg_2024: 281.4, Avg_2010: 217.7, Change:  63.7, Routes:  4, dx:  22, dy:   8 }, 
+  { Name: "Adelaide",   Lat: -34.945, Lon: 138.530, Avg_2024: 438.8, Avg_2010: 383.0, Change:  55.8, Routes:  9, dx:   0, dy: -24 },
+  { Name: "Perth",      Lat: -31.940, Lon: 115.967, Avg_2024: 685.9, Avg_2010: 567.5, Change: 118.4, Routes: 10, dx:   0, dy: -30 }, 
+  { Name: "Hobart",     Lat: -42.836, Lon: 147.510, Avg_2024: 282.1, Avg_2010: 374.5, Change: -92.3, Routes:  3, dx:   0, dy:  24 },
+  { Name: "Cairns",     Lat: -16.887, Lon: 145.755, Avg_2024: 337.4, Avg_2010: 431.0, Change: -93.6, Routes:  4, dx: -40, dy:  -8 }, 
+  { Name: "Canberra",   Lat: -35.307, Lon: 149.195, Avg_2024: 414.6, Avg_2010: 270.3, Change: 144.3, Routes:  4, dx: -48, dy:  14 },
+  { Name: "Townsville", Lat: -19.253, Lon: 146.765, Avg_2024: 372.9, Avg_2010: 313.3, Change:  59.6, Routes:  3, dx:  36, dy:   0 }, 
+  { Name: "Darwin",     Lat: -12.408, Lon: 130.873, Avg_2024: 686.6, Avg_2010: 605.6, Change:  80.9, Routes:  5, dx:   0, dy: -26 }, 
+];
+
+const specSymbolMap = {
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "width": "container", "height": 650,
+  "projection": { "type": "mercator", "center": [134, -28], "scale": 700 },
+  "layer": [
+    {
+      "data": { "url": "states.json", "format": { "type": "topojson", "feature": "states" } },
+      "mark": { "type": "geoshape", "fill": "#e8edf5", "stroke": "#c6cfdf", "strokeWidth": 1 }
+    },
+    {
+      "data": { "values": AIRPORT_CHANGE },
+      "transform": [{ "calculate": "abs(datum.Change)", "as": "AbsChange" }],
+      "mark": { "type": "circle", "opacity": 0.78, "stroke": "#fff", "strokeWidth": 1.5 },
+      "encoding": {
+        "longitude": { "field": "Lon", "type": "quantitative" },
+        "latitude":  { "field": "Lat", "type": "quantitative" },
+        "size": {
+          "field": "AbsChange", "type": "quantitative",
+          "scale": { "type": "linear", "range": [150, 5000], "domain": [0, 150] },
+          "legend": {
+            "title": "Fare change (|$AUD|)",
+            "orient": "bottom-left",
+            "values": [25, 50, 100, 150],
+            "symbolFillColor": "#aab5cc",
+            "symbolStrokeColor": "#fff",
+            "labelColor": "#6b7a9e",
+            "titleColor": "#3d4a6a",
+            "titleFontSize": 12,
+            "labelFontSize": 11,
+            "labelExpr": "'$' + datum.value"
+          }
+        },
+        "color": { "condition": { "test": "datum.Change > 0", "value": B_DARK }, "value": ACCENT },
+        "tooltip": [
+          { "field": "Name",     "title": "Airport" },
+          { "field": "Avg_2024", "title": "Avg Fare 2024", "format": "$,.0f" },
+          { "field": "Avg_2010", "title": "Avg Fare 2010", "format": "$,.0f" },
+          { "field": "Change",   "title": "Change ($)",    "format": "+$,.0f" },
+          { "field": "Routes",   "title": "Routes tracked" }
+        ]
+      }
+    },
+    {
+      "data": { "values": AIRPORT_CHANGE },
+      "mark": { "type": "text", "fontSize": 12, "fontWeight": 500, "color": "#1c2340", "font": "Inter, sans-serif" },
+      "encoding": {
+        "longitude": { "field": "Lon" },
+        "latitude":  { "field": "Lat" },
+        "text": { "field": "Name" },
+        "dx":   { "field": "dx", "type": "quantitative" },
+        "dy":   { "field": "dy", "type": "quantitative" }
+      }
+    }
+  ]
+};
+// =================================================================
+// EMBED ALL (14 charts)
 // =================================================================
 const charts = [
   ["#chart-map",            specMap          ],
@@ -1054,13 +987,14 @@ const charts = [
   ["#chart-passengers",     specPassengers   ],
   ["#chart-loadfactor",     specLoadFactor   ],
   ["#chart-aircraft",       specAircraft     ],
+  ["#chart-choropleth",     specChoropleth   ],
+  ["#chart-symbol-map",     specSymbolMap    ],
 ];
 
 charts.forEach(([sel, spec]) => {
   vegaEmbed(sel, spec, OPT).catch(err => {
     const el = document.querySelector(sel);
-    if (el) el.innerHTML =
-      `<p style="color:#c00;padding:16px;font-size:12px">Chart error: ${err.message}</p>`;
+    if (el) el.innerHTML = `<p style="color:#c00;padding:16px;font-size:12px">Chart error: ${err.message}</p>`;
     console.error(sel, err);
   });
 });
